@@ -175,7 +175,7 @@ class Face_Detector {
                         foreach( $this->faces as $face ) {
                             if ( $face && $x >= $face['x'] && $x <= $face['x'] + $face['w'] && $y >= $face['y'] && $y <= $face['y'] + $face['w'] ) {
                                 $continue = true;
-                                $x += $face['w'] - 20; // skip ahead
+                                $x += $face['w']; // skip ahead
                             }
                         }
                     }
