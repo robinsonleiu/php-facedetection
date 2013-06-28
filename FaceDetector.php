@@ -25,6 +25,7 @@ class Face_Detector {
     protected $canvas;
     protected $faces;
     protected $ratio;
+    public static $offset;
     private $reduced_canvas;
 
     public function __construct($detection_file = 'detection.dat') {
@@ -61,6 +62,7 @@ class Face_Detector {
         $im_width = imagesx($this->canvas);
         $im_height = imagesy($this->canvas);
 
+        self::$offset = 10;
 
         //Resample before detection?
         $this->ratio = 0;
@@ -160,6 +162,7 @@ class Face_Detector {
         $s_h = $height/20.0;
         $start_scale = $s_h < $s_w ? $s_h : $s_w;
         $scale_update = 1 / 1.2;
+        $offset = self::$offset;
         for($scale = $start_scale; $scale > 1; $scale *= $scale_update ){
             $w = (20*$scale) >> 0;
             $endx = $width - $w - 1;
@@ -173,7 +176,7 @@ class Face_Detector {
                     $continue = false;
                     if ( is_array( $this->faces ) ) {
                         foreach( $this->faces as $face ) {
-                            if ( $face && $x >= $face['x'] && $x <= $face['x'] + $face['w'] && $y >= $face['y'] && $y <= $face['y'] + $face['w'] ) {
+                            if ( $face && $x >= $face['x'] - $offset && $x + $face['w'] - $offset <= $face['x'] + $face['w'] && $y >= $face['y'] - $offset && $y + $face['w'] - $offset <= $face['y'] + $face['w'] ) {
                                 $continue = true;
                                 $x += $face['w']; // skip ahead
                             }
