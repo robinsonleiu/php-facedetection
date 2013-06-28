@@ -1,7 +1,9 @@
 PHP Face Detection
 ==================
 
-This class detect one face in images. This is a pure PHP port of an existing JS code from Karthik Tharavaad.
+This fork detects multiple faces in an image. It's by no means perfect though!
+
+This is a pure PHP port of existing JS code from Karthik Tharavaad.
 
 Requirements
 ------------
